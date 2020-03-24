@@ -1,0 +1,48 @@
+CREATE DATABASE user_service;
+REVOKE CONNECT ON DATABASE user_service FROM PUBLIC;
+CREATE USER user_service WITH PASSWORD 'user_service';
+GRANT CONNECT ON DATABASE user_service TO user_service;
+\c user_service
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT USAGE ON SCHEMA public TO user_service;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO user_service;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, USAGE ON SEQUENCES TO user_service;
+
+// Lagom Persistence Tables
+
+CREATE TABLE IF NOT EXISTS journal (
+  ordering BIGSERIAL,
+  persistence_id VARCHAR(255) NOT NULL,
+  sequence_number BIGINT NOT NULL,
+  deleted BOOLEAN DEFAULT FALSE,
+  tags VARCHAR(255) DEFAULT NULL,
+  message BYTEA NOT NULL,
+  PRIMARY KEY(persistence_id, sequence_number)
+);
+
+CREATE UNIQUE INDEX journal_ordering_idx ON journal(ordering);
+
+CREATE TABLE IF NOT EXISTS snapshot (
+  persistence_id VARCHAR(255) NOT NULL,
+  sequence_number BIGINT NOT NULL,
+  created BIGINT NOT NULL,
+  snapshot BYTEA NOT NULL,
+  PRIMARY KEY(persistence_id, sequence_number)
+);
+
+CREATE TABLE read_side_offsets (
+  read_side_id VARCHAR(255),
+  tag VARCHAR(255),
+  sequence_offset bigint,
+  time_uuid_offset char(36),
+  PRIMARY KEY (read_side_id, tag)
+);
+
+// Read Side Tables
+
+CREATE TABLE IF NOT EXISTS users (
+  user_id VARCHAR(255) NOT NULL,
+  provider_key VARCHAR(255) NOT NULL,
+  provider_id VARCHAR(255) NOT NULL,
+  PRIMARY KEY (provider_id, provider_key)
+);

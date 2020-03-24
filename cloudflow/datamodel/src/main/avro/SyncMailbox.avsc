@@ -1,0 +1,27 @@
+{
+  "namespace": "com.example.data",
+  "type": "record",
+  "name": "SyncMailbox",
+  "fields":[
+    {
+      "name": "userId",
+      "type": "string"
+    },
+    {
+      "name": "email",
+      "type": "string"
+    },
+    {
+      "name": "direction",
+      "type": "string"
+    },
+    {
+      "name": "duration",
+      "type": "long"
+    },
+    {
+      "name": "timestamp",
+      "type": "long"
+    }
+  ]
+}

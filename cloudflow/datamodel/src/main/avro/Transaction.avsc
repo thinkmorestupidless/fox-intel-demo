@@ -1,0 +1,11 @@
+{
+  "namespace": "com.example.data",
+  "type": "record",
+  "name": "Transaction",
+  "fields":[
+    {
+      "name": "header",
+      "type": "com.example.data.MailHeader"
+    }
+  ]
+}

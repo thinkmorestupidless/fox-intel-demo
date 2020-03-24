@@ -1,0 +1,11 @@
+{
+  "namespace": "com.example.data",
+  "type": "record",
+  "name": "Newsletter",
+  "fields":[
+    {
+      "name": "header",
+      "type": "com.example.data.MailHeader"
+    }
+  ]
+}

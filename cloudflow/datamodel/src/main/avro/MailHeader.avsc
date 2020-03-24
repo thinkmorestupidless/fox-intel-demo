@@ -1,0 +1,23 @@
+{
+  "namespace": "com.example.data",
+  "type": "record",
+  "name": "MailHeader",
+  "fields":[
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "from",
+      "type": "string"
+    },
+    {
+      "name": "to",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "type": "long"
+    }
+  ]
+}

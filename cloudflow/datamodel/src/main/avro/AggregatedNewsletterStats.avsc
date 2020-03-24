@@ -1,0 +1,24 @@
+{
+    "namespace": "com.example.data",
+    "type": "record",
+    "name": "AggregatedNewsletterStats",
+    "fields":[
+         {
+            "name": "startTime",
+            "type": "long"
+         },
+         {
+             "name": "windowDuration",
+             "type": "long"
+          },
+         {
+             "name": "avgCallDuration",
+             "type": "double"
+          },
+          {
+              "name": "totalCallDuration",
+              "type": "long"
+           }
+    ]
+}
+
